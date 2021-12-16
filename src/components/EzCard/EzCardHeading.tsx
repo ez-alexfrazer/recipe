@@ -30,7 +30,7 @@ const EzCardHeading: React.FC<HeadingProps> = ({title, subtitle, actions}) => {
   );
 
   const layout = actions && (
-    <EzLayout layout="cluster" css={{justifyContent: 'space-between', alignItems: 'baseline'}}>
+    <EzLayout layout="cluster">
       <div>{heading}</div>
       <div>{actions}</div>
     </EzLayout>
