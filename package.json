@@ -3,9 +3,10 @@
   "version": "12.4.2",
   "description": "ezCater's React UI Component library",
   "license": "MIT",
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
-  "types": "dist/types/index.d.ts",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs.js",
+  "browser": "dist/index.global.js",
+  "types": "dist/index.d.ts",
   "files": [
     "dist",
     "lib"
@@ -75,6 +76,7 @@
     "sosia-types": "^1.0.4",
     "ts-jest": "^24.3.0",
     "tslint": "^5.20.1",
+    "tsup": "^5.11.6",
     "typescript": "^4.2.2"
   },
   "scripts": {
@@ -82,12 +84,9 @@
     "start:with-ie11": "concurrently \"npm run build:watch\" \"(cd doc-site/ && npm run develop:with-ie11)\" --kill-others",
     "type-check": "tsc --noEmit",
     "type-check:watch": "npm run type-check -- --watch",
-    "build": "npm run clean && npm run copy:packages && npm run build:types && npm run build:cjs && npm run build:esm && cp .npmignore dist",
-    "build:types": "tsc --emitDeclarationOnly --rootDir src",
+    "build": "tsup",
+    "build:watch": "tsup --watch",
     "build:packages": "rm -rf .parcel-cache && parcel build packages/@recipe-ui/*/",
-    "build:cjs": "cross-env BABEL_ENV=cjs babel src --out-dir dist/cjs --extensions \".ts,.tsx\" --source-maps inline --copy-files",
-    "build:esm": "cross-env BABEL_ENV=esm babel src --out-dir dist/esm --extensions \".ts,.tsx\" --source-maps inline --copy-files",
-    "build:watch": "npm run build:cjs && npm run build:esm -- --watch",
     "build:docs:prod": "cd doc-site && npm run build:prod",
     "copy:packages": "cd packages/@stitches/core && npm run package",
     "install:docs": "cd doc-site && npm ci",
